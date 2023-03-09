@@ -22,7 +22,7 @@
           :style="{ backgroundColor: note.backgroundColor }"
         >
             <p class="main-text">{{ note.text }}</p>
-            <div class="card-header">
+            <div class="card-footer">
               <p class="date">{{ note.date.toLocaleDateString("en-US") }}</p>
               <button @click="deleteNote(note)">Delete</button>
           </div>
@@ -101,7 +101,7 @@
   }
 
   .card {
-    width: auto;
+    max-width: 300px;
     height: auto;
     background-color: rgb(237, 182, 44);
     padding: 10px;
@@ -123,15 +123,17 @@
     flex-wrap: wrap;
   }
   
-  .card-header {
+  .card-footer {
     margin-top: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    
   }
 
-  .card-header button {
+  .card-footer button {
     border: none;
+    margin-left: 20px;
     background-color: aliceblue;
     padding: 3px 4px;
     border-radius: 5px;
