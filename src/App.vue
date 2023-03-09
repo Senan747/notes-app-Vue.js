@@ -15,9 +15,17 @@
         <button @click="showModal = true">+</button>
       </header> 
       <div class="cards-container">
-        <div v-for="note in notes" :key="note.id" class="card" :style="{ backgroundColor: note.backgroundColor }">
-          <p class="main-text">{{ note.text }}</p>
-          <p class="date">{{ note.date.toLocaleDateString("en-US") }}</p>
+        <div 
+          v-for="note in notes" 
+          :key="note.id" 
+          class="card" 
+          :style="{ backgroundColor: note.backgroundColor }"
+        >
+            <p class="main-text">{{ note.text }}</p>
+            <div class="card-header">
+              <p class="date">{{ note.date.toLocaleDateString("en-US") }}</p>
+              <button @click="deleteNote(note)">Delete</button>
+          </div>
         </div>
       </div>
     </div>
@@ -31,6 +39,7 @@
   const newNote = ref("")
   const errorMessage = ref("")
   const notes = ref([])
+  
 
   function getRandomColor(){
     return "hsl(" + Math.random() * 360 + ", 100%, 75%)";
@@ -51,6 +60,11 @@
     newNote.value = "";
     errorMessage.value = "";
   }
+
+  const deleteNote = (note) => {
+    notes.value = notes.value.filter((n) => n.id !== note.id);
+  }
+
 
 </script>
 <style scoped>
@@ -87,8 +101,8 @@
   }
 
   .card {
-    width: 225px;
-    height: 225px;
+    width: auto;
+    height: auto;
     background-color: rgb(237, 182, 44);
     padding: 10px;
     border-radius: 15px;
@@ -107,6 +121,21 @@
   .cards-container{
     display: flex;
     flex-wrap: wrap;
+  }
+  
+  .card-header {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .card-header button {
+    border: none;
+    background-color: aliceblue;
+    padding: 3px 4px;
+    border-radius: 5px;
+    cursor: pointer;
   }
 
   .overlay {
